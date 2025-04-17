@@ -25,13 +25,13 @@ class PositionData
 
 public class supabase : MonoBehaviour
 {
-    private string supabaseUrl = "https://xvuvlljwjptwnnivwlzl.supabase.co";
-    private string supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dXZsbGp3anB0d25uaXZ3bHpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExMTEzMDEsImV4cCI6MjA1NjY4NzMwMX0.YcPK0pwU1E1IRe9Q_3kLqBadQwmiDIFV7zta7Wabg0g";
+    private string supabaseUrl = "..";
+    private string supabaseKey = "...";
 
     private string playersTable = "players";
     private string objectsTable = "objects";
 
-    public string objectName = "Cube1"; // Objeyi tanýmlamak için
+    public string objectName = "Cube1"; // Objeyi tanÃ½mlamak iÃ§in
     public GameObject monkey;
 
     void Start()
@@ -41,7 +41,7 @@ public class supabase : MonoBehaviour
 
     IEnumerator GetPlayers()
     {
-        string url = $"{supabaseUrl}/rest/v1/{playersTable}?select=*";
+        string url = $"{supa...";
         UnityWebRequest request = UnityWebRequest.Get(url);
         request.SetRequestHeader("apikey", supabaseKey);
         request.SetRequestHeader("Authorization", "Bearer " + supabaseKey);
@@ -60,7 +60,7 @@ public class supabase : MonoBehaviour
 
     IEnumerator AddPlayer(string name, int score)
     {
-        string url = $"{supabaseUrl}/rest/v1/{playersTable}";
+        string url = $"{sup...le}";
         string json = $"{{\"name\": \"{name}\", \"score\": {score}}}";
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -95,7 +95,7 @@ public class supabase : MonoBehaviour
         PositionData posData = new PositionData(objectName, objTransform.position);
         string json = JsonUtility.ToJson(posData);
 
-        string url = $"{supabaseUrl}/rest/v1/{objectsTable}";
+        string url = $"{su...}";
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
@@ -121,7 +121,7 @@ public class supabase : MonoBehaviour
 
     IEnumerator LoadPosition()
     {
-        string url = $"{supabaseUrl}/rest/v1/{objectsTable}?name=eq.{objectName}&select=posX,posY,posZ";
+        string url = $"{sup....}";
 
         Debug.Log("1");
 
@@ -152,16 +152,16 @@ public class supabase : MonoBehaviour
                     Vector3 loadedPosition = new Vector3(posData.posX, posData.posY, posData.posZ);
                     monkey.transform.position = loadedPosition;
 
-                    Debug.Log("Konum yüklendi: " + loadedPosition);
+                    Debug.Log("Konum yÃ¼klendi: " + loadedPosition);
                 }
                 else
                 {
-                    Debug.LogError("Konum verisi çözümlenemedi.");
+                    Debug.LogError("Konum verisi Ã§Ã¶zÃ¼mlenemedi.");
                 }
             }
             else
             {
-                Debug.Log("Kayýtlý konum bulunamadý.");
+                Debug.Log("KayÃ½tlÃ½ konum bulunamadÃ½.");
             }
         }
         else
@@ -172,7 +172,7 @@ public class supabase : MonoBehaviour
 
     IEnumerator DeleteObjectPosition()
     {
-        string url = $"{supabaseUrl}/rest/v1/{objectsTable}?name=eq.{objectName}";
+        string url = $"{....}";
 
         UnityWebRequest request = new UnityWebRequest(url, "DELETE");
         request.SetRequestHeader("apikey", supabaseKey);
@@ -182,11 +182,11 @@ public class supabase : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log($"Veritabanýndan {objectName} kaydý baþarýyla silindi.");
+            Debug.Log($"VeritabanÃ½ndan {objectName} kaydÃ½ baÃ¾arÃ½yla silindi.");
         }
         else
         {
-            Debug.LogError("Silme hatasý: " + request.error);
+            Debug.LogError("Silme hatasÃ½: " + request.error);
         }
     }
 
