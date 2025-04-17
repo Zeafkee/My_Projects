@@ -1,2 +1,2 @@
 # My_Projects
-some codes from my released or unreleased games
+Some codes from my released or unreleased games
